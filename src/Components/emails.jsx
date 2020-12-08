@@ -17,7 +17,8 @@ class Emails extends React.Component {
     render() {
         return (
             <div>
-                <input type='text' placeholder='search by subject or sender' onChange={(ev) => this.setState({ filter: ev.target.value })}></input>
+                <input type='text' placeholder='search by subject or sender' onChange={(ev) =>
+                    this.setState({ filter: ev.target.value })}></input>
                 <ul>
                     {
                         this.state.emails.length ?
@@ -27,18 +28,14 @@ class Emails extends React.Component {
                                     email.sender.includes(this.state.filter) :
                                     true
                             }).map((email) => {
-                                return <li>{email.sender}: <Link to={`/email/${email.id}`}>{email.subject}</Link></li>
+                                //server has off-by-one error with ids
+                                return <li>{email.sender}: <Link to={`/email/${email.id - 1}`}>{email.subject}</Link></li>
                             }) :
                             <p>No emails yet :(</p>
                     }
                 </ul>
-
-
             </div >
-
         )
-
-
     }
 }
 

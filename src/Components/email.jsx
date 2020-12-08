@@ -18,6 +18,21 @@ class Email extends React.Component {
         const json = await response.json()
         this.setState({ email: json })
     }
+
+    async delete() {
+        fetch('http://localhost:3001/emails/${id}', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+
+        }).then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Your message was deleted!')
+                this.props.history.push("/");
+            })
+    }
     render() {
         return <div>
             <p>
@@ -31,6 +46,9 @@ class Email extends React.Component {
             </p>
             <p>
                 Message: {this.state.email.message}
+            </p>
+            <p>
+                <button onClick={() => this.delete()}>Delete</button>
             </p>
         </div>
     }
