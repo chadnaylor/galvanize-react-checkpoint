@@ -20,11 +20,10 @@ class Email extends React.Component {
     }
 
     async delete() {
-        fetch('http://localhost:3001/emails/${id}', {
+        const id = this.props.match.params.id;
+
+        fetch(`http://localhost:3001/emails/${id}`, {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
 
         }).then(response => response.json())
             .then(data => {
