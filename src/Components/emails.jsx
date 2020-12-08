@@ -1,10 +1,12 @@
 import React from 'react'
-
+import { Switch, Link, Route } from 'react-router-dom'
+import Email from './email'
 
 class Emails extends React.Component {
 
     state = {
-        emails: []
+        emails: [],
+        filter: '',
     }
 
     async componentDidMount() {
@@ -14,9 +16,26 @@ class Emails extends React.Component {
     }
     render() {
         return (
-            this.state.emails.map((email) => {
-                return <p>{email.sender}: {email.message}</p>
-            })
+            <div>
+                <input type='text' placeholder='search by subject or sender' onChange={(ev) => this.setState({ filter: ev.target.value })}></input>
+                <ul>
+                    {
+                        this.state.emails.length ?
+                            this.state.emails.filter((email) => {
+                                return this.state.filter.length > 0 ?
+                                    email.subject.includes(this.state.filter) ||
+                                    email.sender.includes(this.state.filter) :
+                                    true
+                            }).map((email) => {
+                                return <li>{email.sender}: <Link to={`/email/${email.id}`}>{email.subject}</Link></li>
+                            }) :
+                            <p>No emails yet :(</p>
+                    }
+                </ul>
+
+                <Route path={`/email/:id`} component={Email} />
+            </div >
+
         )
 
 

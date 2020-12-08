@@ -16,6 +16,8 @@ class App extends React.Component {
         <hr />
 
         <Route exact path="/" component={Emails} />
+        <Route exact path="/email" component={Emails} />
+
         {/* <Route path="/about" component={About} /> */}
 
       </Router>
