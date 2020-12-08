@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Link, Route } from 'react-router-dom'
+import email from './email'
 import Email from './email'
 
 class Emails extends React.Component {
@@ -12,7 +13,8 @@ class Emails extends React.Component {
     async componentDidMount() {
         const response = await fetch('http://localhost:3001/emails')
         const json = await response.json()
-        this.setState({ emails: json })
+        let correctJson = json.map((email, index) => ({ ...email, id: index }))
+        this.setState({ emails: correctJson })
     }
     render() {
         return (
@@ -28,8 +30,7 @@ class Emails extends React.Component {
                                     email.sender.includes(this.state.filter) :
                                     true
                             }).map((email) => {
-                                //server has off-by-one error with ids
-                                return <li>{email.sender}: <Link to={`/email/${email.id - 1}`}>{email.subject}</Link></li>
+                                return <li>{email.sender}: <Link to={`/email/${email.id}`}>{email.subject}</Link></li>
                             }) :
                             <p>No emails yet :(</p>
                     }
