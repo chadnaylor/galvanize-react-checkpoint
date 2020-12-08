@@ -19,7 +19,20 @@ class Email extends React.Component {
         this.setState({ email: json })
     }
     render() {
-        return <div>{this.state.email.sender}</div>
+        return <div>
+            <p>
+                Sender: {this.state.email.sender}
+            </p>
+            <p>
+                Recipient: {this.state.email.recipient}
+            </p>
+            <p>
+                Subject: {this.state.email.subject}
+            </p>
+            <p>
+                Message: {this.state.email.message}
+            </p>
+        </div>
     }
 }
 

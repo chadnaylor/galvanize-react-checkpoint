@@ -33,7 +33,7 @@ class Emails extends React.Component {
                     }
                 </ul>
 
-                <Route path={`/email/:id`} component={Email} />
+
             </div >
 
         )
