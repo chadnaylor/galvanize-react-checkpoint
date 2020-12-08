@@ -1,23 +1,26 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
+import { withRouter } from 'react-router-dom'
 
-const Email = () => {
+class Email extends React.Component {
+    constructor() {
+        super()
 
-    let { id } = useParams()
+    }
+    state = {
+        email: {}
 
+    }
 
-    useEffect(() => {
-        async function fetchData() {
-            console.log('test')
-            const response = await fetch(`http://localhost:3001/emails/${id}`)
-            const json = await response.json()
-            this.setState({ email: json })
-        }
-        fetchData()
-    })
+    async componentDidMount() {
+        const id = this.props.match.params.id;
 
-    return <div></div>
-
+        const response = await fetch(`http://localhost:3001/emails/${id}`)
+        const json = await response.json()
+        this.setState({ email: json })
+    }
+    render() {
+        return <div>{this.state.email.sender}</div>
+    }
 }
 
-export default Email
+export default withRouter(Email)

@@ -2,6 +2,8 @@ import './App.css';
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Emails from './Components/emails'
+import Send from './Components/send'
+
 
 class App extends React.Component {
   render() {
@@ -10,7 +12,7 @@ class App extends React.Component {
 
         <ul>
           <li><Link to="/">Emails</Link></li>
-          {/* <li><Link to="/about">About</Link></li> */}
+          <li><Link to="/Send">Send</Link></li>
         </ul>
 
         <hr />
@@ -18,7 +20,7 @@ class App extends React.Component {
         <Route exact path="/" component={Emails} />
         <Route exact path="/email" component={Emails} />
 
-        {/* <Route path="/about" component={About} /> */}
+        <Route path="/send" component={Send} />
 
       </Router>
     );
